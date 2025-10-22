@@ -1,19 +1,23 @@
 <?php
-
 /**
- * Inspeciona uma ou mais variáveis e para a execução do script.
- * @param mixed ...$vars As variáveis para inspecionar.
+ * Inspeciona uma ou mais variáveis e, opcionalmente, para a execução do script.
+ *
+ * @param mixed ...$vars  As variáveis para inspecionar.
+ * @param bool  $exit     Define se o script deve encerrar após o dump (padrão: true).
  */
-function dd(...$vars)
+function dd(...$vars, bool $exit = true)
 {
-    echo '<pre>'; // Prepara a formatação para ficar legível
+    echo '<pre>'; // Formatação legível no navegador
 
-    // Loop para inspecionar todas as variáveis passadas para a função
+    // Loop para inspecionar todas as variáveis passadas
     foreach ($vars as $var) {
         var_dump($var);
     }
 
     echo '</pre>';
-    die(); // Para a execução
-}
 
+    // Interrompe a execução apenas se $exit for verdadeiro
+    if ($exit) {
+        die();
+    }
+}

@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="929ab9a8-7a05-4b4e-afd3-72ae6cf8ebae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dao/UserRelationDaoMysql.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/UserRelation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/partials/feed-item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/PostDaoMysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/dao/PostDaoMysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/UserDaoMysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/dao/UserDaoMysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +89,7 @@
       <workItem from="1760990624386" duration="9965000" />
       <workItem from="1761075333118" duration="26412000" />
       <workItem from="1761165984782" duration="704000" />
-      <workItem from="1761166726286" duration="1288000" />
+      <workItem from="1761166726286" duration="4440000" />
     </task>
     <servers />
   </component>
