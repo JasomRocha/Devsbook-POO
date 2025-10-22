@@ -12,10 +12,12 @@ class User {
     public $email;
     public $password;
     public $name;
-    public $bithdate;
+    public $city;
     public $avatar;
     public $cover;
     public $token;
+    public $birthdate;
+    public $work;
 }
 
 interface UserDao
@@ -23,4 +25,5 @@ interface UserDao
     public function findByToken($token);
     public function findByEmail($id);
     public function update(User $u);
+    public function insert(User $u);
 }
