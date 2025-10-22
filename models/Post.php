@@ -10,4 +10,5 @@ class Post {
 interface PostDao
 {
   public function insert(Post $post);
+  public function getHomeFeed($id_user);
 }
