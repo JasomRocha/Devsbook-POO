@@ -1,7 +1,8 @@
 <?php
 require_once 'models/Post.php';
-require_once "dao/UserRelationDaoMysql.php";
-require_once "dao/UserDaoMysql.php";
+require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/UserDaoMysql.php';
+
 class PostDaoMysql implements PostDao{
     private $pdo;
 
@@ -23,12 +24,12 @@ class PostDaoMysql implements PostDao{
         $sql->execute();
     }
 
-    public function getHomeFeed($user_id){
+    public function getHomeFeed($user_id): array{
         $array = [];
 
         $urDao = new UserRelationDaoMysql($this->pdo);
-        $userList = $urDao->getRelationsFrom($user_id);
-
+        $userList = $urDao->getFollowing($user_id);
+        $userList[]= $user_id;
         $sql = $this->pdo->query("SELECT * FROM posts  WHERE $user_id IN (".implode(',', $userList).") ORDER BY created_at DESC");
 
         if($sql->rowCount() > 0){
@@ -36,6 +37,35 @@ class PostDaoMysql implements PostDao{
 
             $array = $this->_postListToObject($data, $user_id);
         }
+        return $array;
+    }
+
+    public function getUserFeed($user_id): array{
+        $array = [];
+
+        $sql = $this->pdo->prepare("SELECT * FROM posts WHERE id_user = :user_id ORDER BY created_at DESC");
+        $sql->bindValue(':user_id', $user_id);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+            $array = $this->_postListToObject($data, $user_id);
+        }
+        return $array;
+    }
+
+    public function getPhotosFrom($id_user): array{
+        $array = [];
+
+        $sql = $this->pdo->prepare("SELECT * FROM posts WHERE id_user = :id_user AND type = 'photo' ORDER BY created_at DESC");
+        $sql->bindValue(':id_user', $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+            $array = $this->_postListToObject($data, $id_user);
+        }
+
         return $array;
     }
 

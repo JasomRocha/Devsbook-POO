@@ -1,5 +1,7 @@
 <?php
 require_once 'models/User.php';
+require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostDaoMysql.php';
 class UserDaoMysql implements UserDao{
     private $pdo;
 
@@ -8,8 +10,9 @@ class UserDaoMysql implements UserDao{
     }
 
     // Recebe um array e monta um objeto usuario
-    private function generateUser($array): User{
+    private function generateUser($array, $full = false): User{
         $u = new User();
+
         $u->id = $array['id'] ?? 0;
         $u->name = $array['name'] ?? '';
         $u->email = $array['email'] ?? '';
@@ -21,6 +24,26 @@ class UserDaoMysql implements UserDao{
         $u->token = $array['token'] ?? '';
         $u->work = $array['work'] ?? '';
 
+        if($full){
+            $urDaoMysql = new UserRelationDaoMysql($this->pdo);
+            $postDaoMysql = new PostDaoMysql($this->pdo);
+            // Quem o usuario segue
+            $u->following = $urDaoMysql->getFollowing($u->id);
+            // precisamos trocar um array de ids por um array de objetos
+            foreach($u->following as $key => $following_id){
+                $newUser = $this->findById($following_id);
+                $u->following[$key] = $newUser;
+            }
+            // Quem segue o usuario
+            $u->followers = $urDaoMysql->getFollowers($u->id);
+            // precisamos trocar um array de ids por um array de objetos
+            foreach($u->followers as $key => $follower_id){
+                $newUser = $this->findById($follower_id);
+                $u->followers[$key] = $newUser;
+            }
+            // Fotos
+            $u->photos = $postDaoMysql->getPhotosFrom($u->id);
+        }
         return $u;
     }
 
@@ -54,7 +77,7 @@ class UserDaoMysql implements UserDao{
         }
         return false;
     }
-    public function findById($id)
+    public function findById($id, $full = false)
     {
         if (!empty($id)) {
             $sql = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
@@ -63,7 +86,7 @@ class UserDaoMysql implements UserDao{
 
             if ($sql->rowCount() > 0) {
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
-                $user = $this->generateUser($data); // Retorna o usuario logado
+                $user = $this->generateUser($data, $full); // Retorna o usuario logado
                 return $user;
             }
         }
