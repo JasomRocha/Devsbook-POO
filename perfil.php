@@ -105,19 +105,19 @@ require 'partials/menu.php';
                         <span>(<?= count($user->following)?>)</span>
                     </div>
                     <div class="box-header-buttons">
-                        <a href="/amigos.php?=<?=$user->id?>">ver todos</a>
+                        <a href="/amigos.php?id=<?=$id?>">ver todos</a>
                     </div>
                 </div>
                 <div class="box-body friend-list">
                     <?php if(count($user->following) > 0): ?>
-                        <?php foreach($user->following as $following): ?>
+                        <?php foreach($user->following as $item): ?>
                             <div class="friend-icon">
-                                <a href="/perfil.php?id=<?=$following->id?>">
+                                <a href="/perfil.php?id=<?=$item->id?>">
                                     <div class="friend-icon-avatar">
-                                        <img src="media/avatars/<?=$following->avatar?>" />
+                                        <img src="media/avatars/<?=$item->avatar?>" />
                                     </div>
                                     <div class="friend-icon-name">
-                                        <?=$following->name?>
+                                        <?=$item->name?>
                                     </div>
                                 </a>
                             </div>
