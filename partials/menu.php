@@ -41,7 +41,7 @@
             </div>
         </a>
         <div class="menu-splitter"></div>
-        <a href="../config.php">
+        <a href="../configuracoes.php">
             <div class="menu-item <?= $activeMenu == 'config' ? 'active' : ''?>">
                 <div class="menu-item-icon">
                     <img src="../assets/images/settings.png" width="16" height="16" />

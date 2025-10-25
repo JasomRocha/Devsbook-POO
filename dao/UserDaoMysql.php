@@ -2,6 +2,7 @@
 require_once 'models/User.php';
 require_once 'dao/UserRelationDaoMysql.php';
 require_once 'dao/PostDaoMysql.php';
+require_once 'debugHelper.php';
 class UserDaoMysql implements UserDao{
     private $pdo;
 
@@ -64,6 +65,7 @@ class UserDaoMysql implements UserDao{
     }
 
     public function findByEmail($email){
+
         if(!empty($email)){
             $sql = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $sql->bindValue(':email', $email);
@@ -73,6 +75,24 @@ class UserDaoMysql implements UserDao{
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
                 $user = $this->generateUser($data); // Retorna o usuario logado
                 return $user;
+            }
+        }
+        return false;
+    }
+
+    public function findByName($name){
+        $array = [];
+        if(!empty($name)){
+            $sql = $this->pdo->prepare("SELECT * FROM users WHERE name LIKE :name");
+            $sql->bindValue(':name', '%'.$name.'%');
+            $sql->execute();
+
+            if($sql->rowCount() > 0){
+                $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+                foreach($data as $value){
+                    $array[] = $this->generateUser($value);
+                }
+                return $array;
             }
         }
         return false;

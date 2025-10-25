@@ -1,5 +1,8 @@
 <?php
 $firstName = current(explode(" ", $userInfo->name));
+/** @var string $searchTerm = */
+
+$searchTerm = $searchTerm ?? 'Pesquisar...';
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,9 @@ $firstName = current(explode(" ", $userInfo->name));
             <div class="head-side-left">
                 <div class="search-area">
                     <form method="GET" action="/search.php">
-                        <input type="search" placeholder="Pesquisar" name="s" />
+                        <label for="s" Aba de Pesquisa>
+                                <input type="search" placeholder="<?= $searchTerm ?>" name="search" />
+                        </label>
                     </form>
                 </div>
             </div>
