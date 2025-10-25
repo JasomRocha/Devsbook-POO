@@ -2,6 +2,7 @@
 require_once 'models/Post.php';
 require_once 'dao/UserRelationDaoMysql.php';
 require_once 'dao/UserDaoMysql.php';
+require_once 'dao/PostLikeDaoMysql.php';
 
 class PostDaoMysql implements PostDao{
     private $pdo;
@@ -40,7 +41,7 @@ class PostDaoMysql implements PostDao{
         return $array;
     }
 
-    public function getUserFeed($user_id): array{
+    public function getUserFeed($user_id, $mine_id): array{
         $array = [];
 
         $sql = $this->pdo->prepare("SELECT * FROM posts WHERE id_user = :user_id ORDER BY created_at DESC");
@@ -49,7 +50,7 @@ class PostDaoMysql implements PostDao{
 
         if($sql->rowCount() > 0){
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
-            $array = $this->_postListToObject($data, $user_id);
+            $array = $this->_postListToObject($data, $user_id, $mine_id);
         }
         return $array;
     }
@@ -69,8 +70,12 @@ class PostDaoMysql implements PostDao{
         return $array;
     }
 
-    private function _postListToObject($postList, $id_user){
+    private function _postListToObject($postList, $id_user, $mine_id = null): array
+    {
         $posts = [];
+
+        $postLikeDao = new PostLikeDaoMysql($this->pdo);
+
         foreach($postList as $post){
             $newPost = new Post();
             $userDao = new UserDaoMysql($this->pdo);
@@ -84,8 +89,15 @@ class PostDaoMysql implements PostDao{
             if($post['id_user'] === $id_user){
                 $newPost->mine = true;
             }
+
             $newPost->user = $userDao->findById($post['id_user']);
 
+            //Informações sobre LIKE
+            $newPost->likeCount = $postLikeDao->getLikeCount($newPost->id);
+            $newPost->liked = $postLikeDao->isLiked($newPost->id, $mine_id ?: $id_user);
+            $newPost->comments = [];
+
+            // Informação sobre comments
             $posts[] = $newPost;
         }
         return $posts;

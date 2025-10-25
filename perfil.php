@@ -10,6 +10,7 @@ $postDao = new PostDaoMysql($pdo);
 $userDao = new UserDaoMysql($pdo);
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
 if(!$id){
     $id = $userInfo->id;
 }
@@ -20,6 +21,7 @@ if($id != $userInfo->id){
 
 // Pega informações do usuário
 $user = $userDao->findById($id, true);
+
 if(!$user){
     header('Location:/');
     exit;
@@ -30,7 +32,7 @@ $dateTo = new \DateTime('today');
 $user->ageYears = $dateFrom->diff($dateTo)->y;
 
 // pegar o FEED do usuario
-$feed = $postDao->getUserFeed($id);
+$feed = $postDao->getUserFeed($id, $userInfo->id);
 
 // Verificar se eu sigo este usuario
 

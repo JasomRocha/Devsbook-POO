@@ -1,4 +1,6 @@
 <?php
+require_once 'feed-item-script.php';
+
 $actionPhrase = '';
 switch($item->type){
     case 'text':
@@ -10,7 +12,7 @@ switch($item->type){
 }
 ?>
 
-<div class="box feed-item">
+<div class="box feed-item" data-id="<?=$item->id?>">
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
@@ -30,38 +32,16 @@ switch($item->type){
            <?=nl2br($item->body)?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
-            <div class="like-btn <?=$item->liked ? 'on' : '';?>">0</div>
-            <div class="msg-btn">0</div>
+            <div class="like-btn <?= $item->liked ? 'on' : '' ?>"> <?= $item->likeCount ?> </div>
+            <div class="msg-btn"><?= count($item->comments)?></div>
         </div>
             <div class="feed-item-comments">
-
-<!--                <div class="fic-item row m-height-10 m-width-20">-->
-<!--                    <div class="fic-item-photo">-->
-<!--                        <a href=""><img src="media/avatars/avatar.jpg" /></a>-->
-<!--                    </div>-->
-<!--                    <div class="fic-item-info">-->
-<!--                        <a href="">Bonieky Lacerda</a>-->
-<!--                        Comentando no meu próprio post-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="fic-item row m-height-10 m-width-20">-->
-<!--                    <div class="fic-item-photo">-->
-<!--                        <a href=""><img src="media/avatars/avatar.jpg" /></a>-->
-<!--                    </div>-->
-<!--                    <div class="fic-item-info">-->
-<!--                        <a href="">Bonieky Lacerda</a>-->
-<!--                        Muito legal, parabéns!-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--            <div class="fic-answer row m-height-10 m-width-20">-->
-<!--                <div class="fic-item-photo">-->
-<!--                    <a href="/perfil.php"><img src="media/avatars/--><?php //=$userInfo->avatar?><!--" /></a>-->
-<!--                </div>-->
-<!--                <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />-->
-<!--            </div>-->
-
+                <div class="fic-answer row m-height-10 m-width-20">
+                    <div class="fic-item-photo">
+                        <a href="/perfil.php"><img src="media/avatars/<?=$userInfo->avatar?>" /></a>
+                    </div>
+                    <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
+                </div>
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 $activeMenu = 'home';
 $postDao = new PostDaoMysql($pdo);
+
 $feed = $postDao->getHomeFeed($userInfo->id);
 
 require 'partials/header.php';
