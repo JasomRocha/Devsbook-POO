@@ -14,7 +14,7 @@ switch($item->type){
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href="/perfil.php?id=<?=$item->user->id?>"><img src="media/avatars/<?= $userInfo->avatar ?>" /></a>
+                <a href="/perfil.php?id=<?=$item->user->id?>"><img src="media/avatars/<?= $item->user->avatar ?>" /></a>
             </div>
             <div class="feed-item-head-info">
                 <a href=""><span class="fidi-name"><?=$item->user->name?></span></a>

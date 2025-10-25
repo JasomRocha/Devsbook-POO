@@ -10,6 +10,7 @@ $searchTerm = $searchTerm ?? 'Pesquisar...';
     <meta charset="utf-8" />
     <title></title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>

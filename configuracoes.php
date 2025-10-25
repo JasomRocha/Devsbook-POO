@@ -1,49 +1,83 @@
 <?php
 require_once "config.php";
 require_once "models/Auth.php";
-require_once "dao/postDaoMysql.php";
+require_once "dao/UserDaoMysql.php";
 
 $auth = new Auth($pdo, $base);
 $userInfo = $auth->checkToken();
 $activeMenu = 'config';
 $postDao = new PostDaoMysql($pdo);
-$feed = $postDao->getHomeFeed($userInfo->id);
+
+$userDao = new UserDaoMysql($pdo);
 
 require 'partials/header.php';
 require 'partials/menu.php';
 ?>
 <section class="feed mt-10">
-    <div class="row">
-        <div class="column pr-5">
-            <?php require "partials/feed-editor.php"; ?>
+    <h1>Configurações</h1>
 
-            <?php foreach($feed as $item): ?>
-                <?php require "partials/feed-item.php"; ?>
-            <?php endforeach; ?>
+    <?php if(!empty($_SESSION['flash'])): ?>
+        <?=$_SESSION['flash'];?>
+        <?=$_SESSION['flash'] = '';?>
+    <?php endif; ?>
 
-        </div>
-        <div class="column side pl-5">
-            <div class="box banners">
-                <div class="box-header">
-                    <div class="box-header-text">Patrocinios</div>
-                    <div class="box-header-buttons">
+    <form method="POST" class="config-form" enctype="multipart/form-data" action="configuracoes_action.php">
+        <label>
+            Novo Avatar:<br/>
+            <input type="file" name="avatar" ><br/>
+            <img class="mini" src="media/avatars/<?= $userInfo->avatar?>">
+        </label>
+        <label>
+            Novo Capa:<br/>
+            <input type="file" name="cover"><br/>
+            <img class="mini" src="media/covers/<?= $userInfo->cover?>">
+        </label>
 
-                    </div>
-                </div>
-                <div class="box-body">
-                    <a href=""><img src="https://alunos.b7web.com.br/media/courses/php-nivel-1.jpg" /></a>
-                    <a href=""><img src="https://alunos.b7web.com.br/media/courses/laravel-nivel-1.jpg" /></a>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-body m-10">
-                    Criado com ❤️ por B7Web
-                </div>
-            </div>
-        </div>
-    </div>
+        <hr/>
+
+        <label>
+            Nome Completo:<br/>
+            <input type="text" name="name" value="<?=$userInfo->name?>">
+        </label>
+        <label>
+            E-mail:<br/>
+            <input type="email" name="email" value="<?=$userInfo->email?>">
+        </label>
+        <label>
+            Data de Nascimento:<br/>
+            <input type="text" id="birthdate" name="birthdate" value="<?= date('d/m/Y', strtotime($userInfo->birthdate))?>">
+        </label>
+        <label>
+            Cidade:<br/>
+            <input type="text" name="city" value="<?=$userInfo->city?>">
+        </label>
+        <label>
+            Trabalho:<br/>
+            <input type="text" name="work" value="<?=$userInfo->work?>">
+        </label>
+
+        <hr/>
+
+        <label>
+            Nova Senha:<br/>
+            <input type="password" name="password">
+        </label>
+        <label>
+            Confirmar Nova Senha:<br/>
+            <input type="password" name="password_confirmation">
+        </label>
+        <label>
+            <button class="button">Salvar Alterações</button>
+        </label>
+    </form>
 </section>
-
+<script src="https://unpkg.com/imask"></script>
+<script>
+    IMask(
+        document.getElementById("birthdate"),
+        {mask: '00/00/0000'}
+    );
+</script>
 <?php
 require "partials/footer.php";
 ?>

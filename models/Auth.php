@@ -50,7 +50,6 @@ class Auth {
 
     public function registerUser($name, $email, $password, $birthdate) {
 
-
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $token = md5(time().rand(0, 9999));
 

@@ -39,7 +39,7 @@ require 'partials/menu.php';
     <div class="row">
         <div class="box flex-1 border-top-flat">
             <div class="box-body">
-                <div class="profile-cover" style="background-image: url('media/covers/cover.jpg');"></div>
+                <div class="profile-cover" style="background-image: url('media/covers/<?= $user->cover?>');"></div>
                 <div class="profile-info m-20 row">
                     <div class="profile-info-avatar">
                         <img src="media/avatars/<?=$user->avatar?>" />
@@ -74,23 +74,38 @@ require 'partials/menu.php';
 
             <div class="box">
                 <div class="box-body">
-                    <div class="full-user-photos">
-                        <?php if(count($user->photos)>0):?>
-                            <?php foreach ( $user->photos as $key => $photo ):?>
-                                <div class="user-photo-item">
-                                    <a href="#modal-<?= $key?>" rel="modal:open">
-                                        <img src="media/uploads/<?= $item->body ?>" />
-                                    </a>
-                                    <div id="modal-<?= $key?>" style="display:none">
-                                        <img src="media/uploads/<?= $item->body ?>" />
+                    <div class="ui segment">
+                        <h3 class="ui dividing header">Fotos de <?= htmlspecialchars($user->name) ?></h3>
+
+                        <div class="full-user-photos">
+                            <?php if (count($user->photos) > 0): ?>
+                                <div class="ui four stackable cards">
+                                    <?php foreach ($user->photos as $key => $photo): ?>
+                                        <div class="ui card user-photo-item">
+                                            <div class="image">
+                                                <a href="#modal-<?= $key ?>" rel="modal:open">
+                                                    <img src="media/uploads/<?= htmlspecialchars($photo->body) ?>" alt="Foto <?= $key + 1 ?>" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div id="modal-<?= $key ?>" class="ui small modal" style="display: none;">
+                                            <div class="image content">
+                                                <img class="ui centered large image" src="media/uploads/<?= htmlspecialchars($photo->body) ?>" />
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php else: ?>
+                                <div class="ui placeholder segment center aligned">
+                                    <div class="ui icon header">
+                                        <i class="images outline icon"></i>
+                                        Nenhuma foto disponível
                                     </div>
                                 </div>
-                            <?php endforeach ?>
-                        <?php else: ?>
-                            <div>
-                                <img src="assets/images/images.png" />
-                            </div>
-                        <?php endif?>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
     </div>

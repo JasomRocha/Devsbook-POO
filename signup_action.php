@@ -12,31 +12,31 @@ $birthdate = filter_input(INPUT_POST, 'birthdate'); // 00/00/0000
 if($name && $email && $password && $birthdate) {
 
     $auth = new Auth($pdo, $base);
-    $birthday = explode('/', $birthdate);
-    if(count($birthday) != 3) {
+    $birthdate = explode('/', $birthdate);
+    if(count($birthdate) != 3) {
         $_SESSION['flash'] = 'Data de nascimento inválida';
-        header("Location: ".$base."/login.php");
+        header("Location: ".$base."/sign_up.php");
         exit;
     }
-    $birthday = $birthday[2].'-'.$birthday[1].'-'.$birthday[0];
-    if(strtotime($birthday) === false) {
+    $birthdate = $birthdate[2].'-'.$birthdate[1].'-'.$birthdate[0];
+    if(strtotime($birthdate) === false) {
         $_SESSION['flash'] = 'Data de nascimento inválida';
-        header("Location: ".$base."/login.php");
+        header("Location: ".$base."/sign_up.php");
         exit;
     }
     if($auth->emailExists($email) === false) {
-        $auth->registerUser($name, $email, $password, $birthday);
+        $auth->registerUser($name, $email, $password, $birthdate);
         header("Location: ".$base);
         exit;
     } else {
         $_SESSION['flash'] = 'E-mail já cadastrado';
-        header("Location: ".$base."/login.php");
+        header("Location: ".$base."/sign_up.php");
         exit;
     }
 }
 
 $_SESSION['flash'] = 'Email e/ou senha incorretos.';
-header("Location: ".$base."/login.php");
+header("Location: ".$base."/sign_up.php");
 exit;
 
 
