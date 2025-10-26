@@ -6,7 +6,7 @@ switch($item->type){
     case 'text':
         $actionPhrase = 'fez um post';
         break;
-    case 'image':
+    case 'photo':
         $actionPhrase = 'postou uma foto';
         break;
 }
@@ -29,7 +29,15 @@ switch($item->type){
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
-           <?=nl2br($item->body)?>
+
+            <?php switch($item->type){
+                case 'text':
+                    echo nl2br($item->body);
+                    break;
+                case 'photo':
+                    echo '<img src="media/uploads/' . $item->body . '" />';
+                    break;
+            }?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $item->liked ? 'on' : '' ?>"> <?= $item->likeCount ?> </div>

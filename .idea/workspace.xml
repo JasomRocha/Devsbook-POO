@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="929ab9a8-7a05-4b4e-afd3-72ae6cf8ebae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/follow_action.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ajax_upload.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/modal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/UserRelationDaoMysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/dao/UserRelationDaoMysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserRelation.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserRelation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/vanillaModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/vanillaModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fotos.php" beforeDir="false" afterPath="$PROJECT_DIR$/fotos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/partials/feed-editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/partials/feed-editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/partials/feed-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/partials/feed-item.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/partials/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/partials/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/perfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/perfil.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +101,7 @@
       <workItem from="1761165984782" duration="704000" />
       <workItem from="1761166726286" duration="4440000" />
       <workItem from="1761174405406" duration="727000" />
-      <workItem from="1761335718900" duration="45597000" />
+      <workItem from="1761335718900" duration="51517000" />
     </task>
     <servers />
   </component>

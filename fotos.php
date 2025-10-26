@@ -74,43 +74,32 @@ require 'partials/menu.php';
 
             <div class="box">
                 <div class="box-body">
-                    <div class="ui segment">
-                        <h3 class="ui dividing header">Fotos de <?= htmlspecialchars($user->name) ?></h3>
-
                         <div class="full-user-photos">
-                            <?php if (count($user->photos) > 0): ?>
-                                <div class="ui four stackable cards">
-                                    <?php foreach ($user->photos as $key => $photo): ?>
-                                        <div class="ui card user-photo-item">
-                                            <div class="image">
-                                                <a href="#modal-<?= $key ?>" rel="modal:open">
-                                                    <img src="media/uploads/<?= htmlspecialchars($photo->body) ?>" alt="Foto <?= $key + 1 ?>" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <!-- Modal -->
-                                        <div id="modal-<?= $key ?>" class="ui small modal" style="display: none;">
-                                            <div class="image content">
-                                                <img class="ui centered large image" src="media/uploads/<?= htmlspecialchars($photo->body) ?>" />
+                                    <?php foreach ($user->photos as $key => $item): ?>
+                                        <div class="user-photo-item">
+                                            <a href="#modal-<?= $key ?>" data-modal-open>
+                                                <img src="media/uploads/<?= $item->body ?>" />
+                                            </a>
+                                            <div id="modal-<?= $key ?>" style="display:none">
+                                                <img src="media/uploads/<?= $item->body ?>" />
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
-                            <?php else: ?>
-                                <div class="ui placeholder segment center aligned">
-                                    <div class="ui icon header">
-                                        <i class="images outline icon"></i>
-                                        Nenhuma foto disponível
-                                    </div>
-                                </div>
+                             <?php if (count($user->photos) === 0): ?>
+                                 <div style="text-align: center;"> <img src="assets/images/images.png" /> </div>
                             <?php endif; ?>
                         </div>
-                    </div>
                 </div>
-    </div>
+            </div>
+        </div>
 
 </section>
+<script>
+    window.onload = function(){
+        var modal = new VanillaModal.default();
+    };
+</script>
 
 <?php
 require "partials/footer.php";
